@@ -1,0 +1,26 @@
+{
+  "name": "sigin",
+  "version": "1.0.0",
+  "description": "no des",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/darkie8/signrequest.git"
+  },
+  "author": "darkie9",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.4",
+    "express": "^4.17.1",
+    "express-session": "^1.16.1",
+    "firebase-admin": "^8.0.0",
+    "moment": "^2.24.0",
+    "moment-timezone": "^0.5.25",
+    "morgan": "^1.9.1",
+    "pino": "^5.12.6"
+  }
+}
