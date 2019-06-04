@@ -1,6 +1,6 @@
 const admin = require('firebase-admin');
 
-var serviceAccount = require('../../config/test-project-ca1d8-050ce958df00.json');
+var serviceAccount = require('../../config/cert.json');
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount)
@@ -9,8 +9,8 @@ admin.initializeApp({
 var db = admin.firestore();
 let addDate = (req, res) => {
     body = req.body
-    let data = {cd : req.body.cd}
-    var setDoc = db.collection('createdDate').doc('API').set(data);
+    let data = {cd : req.body.cd, pathname: req.body.pathname}
+    var setDoc = db.collection('createdDate').doc(req.body.pathname).set(data);
     setDoc.then(ref => {
         res.send(`{"res": "done"}`)
     },err => {
@@ -20,7 +20,7 @@ let addDate = (req, res) => {
 let checkDate = (req, res) => {
     body = req.body
     var collection = db.collection('createdDate')
-    var check = collection.where("cd","==", req.body.cd).get()
+    var check = collection.where("cd","==", req.body.cd).where("pathname", "==". req.body.pathname).get()
     check.then(snapshot => {
         if(snapshot.empty) {
             res.send(`{"res": false}`)
