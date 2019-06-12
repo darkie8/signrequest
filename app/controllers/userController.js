@@ -9,7 +9,7 @@ admin.initializeApp({
 var db = admin.firestore();
 let addDate = (req, res) => {
     let body = req.body
-    let data = {cd : body.cd, pathname: body.pathname}
+    let data = {cd :`${body.cd}_${body.pathname}_${body.user}`}
     var setDoc = db.collection('createdDate').doc(body.pathname).set(data);
     setDoc.then(ref => {
         res.send(`{"res": "done"}`)
@@ -20,7 +20,7 @@ let addDate = (req, res) => {
 let checkDate = (req, res) => {
     let body = req.body
     var collection = db.collection('createdDate')
-    var check = collection.where("cd","==", body.cd).where("pathname", "==", body.pathname).get()
+    var check = collection.where("cd","==", `${body.cd}_${body.pathname}_${body.user}`).get()
     check.then(snapshot => {
         if(snapshot.empty) {
             res.send(`{"res": false}`)
