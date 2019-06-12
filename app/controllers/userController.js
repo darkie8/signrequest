@@ -10,7 +10,7 @@ var db = admin.firestore();
 let addDate = (req, res) => {
     let body = req.body
     let data = {cd :`${body.cd}_${body.pathname}_${body.user}`}
-    var setDoc = db.collection('createdDate').doc(body.pathname).set(data);
+    var setDoc = db.collection('createdDate').doc(`${body.pathname}_${body.user}`).set(data);
     setDoc.then(ref => {
         res.send(`{"res": "done"}`)
     },err => {
