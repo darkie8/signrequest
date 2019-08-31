@@ -1,7 +1,7 @@
 // const admin = require('firebase-admin');
 const logger = require('../lib/loggerLib')
 // var serviceAccount = require('../../config/cert.json');
-const response = require('../lib/responseLib')
+const response = require('../lib/responseLib');
 const path = require('path');
 // admin.initializeApp({
 //   credential: admin.credential.cert(serviceAccount)

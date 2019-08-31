@@ -1,10 +1,11 @@
 var multer = require('multer');
 const fse = require('fs-extra');
+const path = require('path');
 var storing = multer.diskStorage({
     destination:function(req,file,cb){
         try{
             console.log(req.params)
-           let dirPath = `./uploads`
+           let dirPath = path.join(__dirname,`../../uploads/`);
             fse.ensureDir(dirPath).then(() => {
                 req.dirPath = dirPath
                 cb(null, dirPath);
