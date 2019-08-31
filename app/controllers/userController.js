@@ -1,12 +1,13 @@
-const admin = require('firebase-admin');
+// const admin = require('firebase-admin');
+const logger = require('../lib/loggerLib')
+// var serviceAccount = require('../../config/cert.json');
+const response = require('../lib/responseLib')
+const path = require('path');
+// admin.initializeApp({
+//   credential: admin.credential.cert(serviceAccount)
+// });
 
-var serviceAccount = require('../../config/cert.json');
-
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount)
-});
-
-var db = admin.firestore();
+// var db = admin.firestore();
 let addDate = (req, res) => {
     let body = req.body
     let data = {cd :`${body.cd}_${body.pathname}_${body.user}`}
@@ -33,7 +34,34 @@ let checkDate = (req, res) => {
     })
 
 }
+let download = (req,res) => {
+    let filePath = path.join(__dirname,`../../uploads/${req.params.admin}/${req.params.user}`) + `/${req.params.type}`
+    res.sendFile(filePath);
+}
+
+let uploadFiles = (req, res) => {
+    
+
+    try{ 
+        
+    logger.info('Success in retrieving data', 'uploadingfilecontroller: uploadFiles()', 5);
+
+     let apiResponse = response.generate(
+         false,
+         'Success in uploading',
+         200, {
+             dirPath: req.dirPath 
+         })
+     res.send( apiResponse )}
+ catch (e) {
+     logger.error('Failed To Retrieve User Data', 'uploadingfilecontroller: uploadFiles()', 10)
+     let apiResponse = response.generate(true, 'failed to upload', 501, 'error')
+     res.send(apiResponse)
+ }
+}
 module.exports = {
     addDate: addDate,
-    checkDate: checkDate
+    checkDate: checkDate,
+    download: download,
+    uploadFiles : uploadFiles
 }

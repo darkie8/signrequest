@@ -21,7 +21,7 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(cookieParser());
 app.use(globalErrorMiddleware.globalErrorHandler);
-
+app.use(express.static('uploads'))
 const modelsPath = './app/models';
 const routesPath = './app/routes';
 
