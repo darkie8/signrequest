@@ -4,7 +4,7 @@ var storing = multer.diskStorage({
     destination:function(req,file,cb){
         try{
             console.log(req.params)
-           let dirPath = `../../uploads/${req.params.admin}/${req.params.user}`
+           let dirPath = `./uploads`
             fse.ensureDir(dirPath).then(() => {
                 req.dirPath = dirPath
                 cb(null, dirPath);
@@ -21,7 +21,7 @@ var storing = multer.diskStorage({
         }
     },
     filename:function(req,file,cb){
-        cb(null, `${req.params.type}.png`);
+        cb(null, `${req.params.admin}_${req.params.user}_${req.params.type}.png`);
     }
 });
 
