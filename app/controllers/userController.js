@@ -35,7 +35,7 @@ let checkDate = (req, res) => {
 
 }
 let download = (req,res) => {
-    let filePath = path.join(__dirname,`../../uploads/${req.params.admin}/${req.params.user}`) + `/${req.params.type}`
+    let filePath = path.join(__dirname,`../../uploads/${req.params.admin}_${req.params.user}_${req.params.type}`)
     res.sendFile(filePath);
 }
 
