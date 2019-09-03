@@ -51,7 +51,7 @@ let uploadFiles = (req, res) => {
          false,
          'Success in uploading',
          200, {
-             dirPath: req.dirPath 
+             status: 0 
          })
      res.send( apiResponse )
     } else {
@@ -59,7 +59,7 @@ let uploadFiles = (req, res) => {
             false,
             req.err,
             500, {
-                dirPath: req.dirPath 
+                status: -1
             })
         res.send( apiResponse )
     }
@@ -67,7 +67,9 @@ let uploadFiles = (req, res) => {
     }
  catch (e) {
      logger.error('Failed To Retrieve User Data', 'uploadingfilecontroller: uploadFiles()', 10)
-     let apiResponse = response.generate(true, 'failed to upload', 501, 'error')
+     let apiResponse = response.generate(true, 'failed to upload', 501, {
+        status: -1
+    })
      res.send(apiResponse)
  }
 }
